@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial: Advanced Features - CreditMetrics</title>
+  <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='components/navbar8.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='components/footer41.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  <style>
+    /* CSS Variables */
+    :root {
+      --dl-color-theme-neutral-light: #ffffff;
+      --dl-color-theme-neutral-dark: #333333;
+      --dl-space-space-threeunits: 48px;
+      --dl-size-size-maxwidth: 1200px;
+      --dl-color-gray-700: #e6e6e6;
+      --dl-color-primary-500: #3498db;
+    }
+    
+    /* Ensure footer stays at bottom with minimal content */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-content {
+      flex: 1 0 auto;
+      padding: 40px 0;
+    }
+
+    footer {
+      flex-shrink: 0;
+    }
+
+    /* Footer and Navbar specific classes */
+    .thq-section-padding {
+      padding-top: var(--dl-space-space-threeunits);
+      padding-bottom: var(--dl-space-space-threeunits);
+    }
+
+    .thq-section-max-width {
+      max-width: var(--dl-size-size-maxwidth);
+    }
+
+    .thq-body-small {
+      font-size: 0.875rem;
+      font-style: normal;
+      font-family: Inter;
+      font-weight: 400;
+      line-height: 1.125rem;
+      text-transform: none;
+      text-decoration: none;
+    }
+
+    .thq-divider-horizontal {
+      width: 100%;
+      height: 1px;
+      background-color: var(--dl-color-gray-700);
+    }
+
+    .thq-button-filled {
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding-top: 12px;
+      padding-left: 24px;
+      border-radius: 8px;
+      padding-right: 24px;
+      padding-bottom: 12px;
+      background-color: var(--dl-color-primary-500);
+    }
+    
+    .thq-button-animated:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Tutorial specific styles */
+    .tutorial-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tutorial-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .section-subheading {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      color: #3498db;
+    }
+
+    .tutorial-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #34495e;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-secondary {
+      background-color: #7f8c8d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #6c7a7a;
+    }
+
+    .tutorial-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .tutorial-step {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .tutorial-step-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .tutorial-step-title {
+      display: inline-block;
+      font-size: 1.4rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .tutorial-note {
+      background-color: #f8f9fa;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin: 20px 0;
+      font-style: italic;
+    }
+
+    code {
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      background-color: #f8f9fa;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    .code-block {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 15px;
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      overflow-x: auto;
+      margin: 20px 0;
+      font-size: 0.9em;
+      line-height: 1.5;
+    }
+
+    .advanced-chart-container {
+      width: 100%;
+      height: 400px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #7f8c8d;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Include Navbar for logged-in users -->
+  {% include 'components/navbar_loggedin.html' %}
+
+  <div class="main-content">
+    <div class="tutorial-container">
+      <h1 class="section-heading">Tutorial 3: Advanced Features</h1>
+      
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">1</span>
+        <h2 class="tutorial-step-title">Understanding the Risk Score</h2>
+        <p class="tutorial-text">
+          After processing a loan application, CreditMetrics provides a comprehensive risk assessment. At the heart of this assessment is the risk score—a numerical value that represents the probability of default.
+        </p>
+        <p class="tutorial-text">
+          The risk score is displayed in two complementary formats:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Default Probability:</strong> A percentage between 0% and 100% indicating the likelihood that the loan will default</li>
+          <li><strong>Risk Category:</strong> A simplified classification into Low, Medium, or High risk bands</li>
+        </ul>
+        <div class="risk-indicators">
+          <div class="risk-indicator risk-low">
+            <div class="risk-title">Low Risk</div>
+            <div class="risk-percentage">0-10%</div>
+            <div class="risk-description">Default probability is minimal. These applications represent excellent credit risks.</div>
+          </div>
+          <div class="risk-indicator risk-medium">
+            <div class="risk-title">Medium Risk</div>
+            <div class="risk-percentage">11-30%</div>
+            <div class="risk-description">Moderate default probability. Consider additional verification or guarantees.</div>
+          </div>
+          <div class="risk-indicator risk-high">
+            <div class="risk-title">High Risk</div>
+            <div class="risk-percentage">31-100%</div>
+            <div class="risk-description">Substantial default probability. Careful evaluation and mitigation required.</div>
+          </div>
+        </div>
+        <div class="tutorial-note">
+          <strong>Note:</strong> Risk thresholds can be customized for your bank's specific risk tolerance in the account settings.
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">2</span>
+        <h2 class="tutorial-step-title">Exploring the Risk Report</h2>
+        <p class="tutorial-text">
+          Each analysis generates a detailed risk report that provides context and explanation for the risk assessment. Understanding the components of this report will help you make informed decisions.
+        </p>
+        <img src="{{ url_for('static', filename='images/report_overview.jpg') }}" alt="Risk Report Overview" class="tutorial-image" onerror="this.src='https://via.placeholder.com/800x400?text=Risk+Report+Overview'">
+        <p class="tutorial-text">
+          Key sections of the risk report include:
+        </p>
+        <div class="report-section">
+          <h3 class="report-title">1. Executive Summary</h3>
+          <p class="tutorial-text">
+            A concise overview of the risk assessment, including the final risk score, confidence level, and primary risk factors. This section provides a quick snapshot for decision-makers.
+          </p>
+        </div>
+        <div class="report-section">
+          <h3 class="report-title">2. Contributing Factors</h3>
+          <p class="tutorial-text">
+            Identifies the specific attributes that contributed most significantly to the risk assessment, both positively and negatively. This helps you understand why a particular score was assigned.
+          </p>
+          <p class="tutorial-text">
+            For example, a report might indicate that a high credit score significantly reduced risk, while a high debt-to-income ratio increased risk.
+          </p>
+        </div>
+        <div class="report-section">
+          <h3 class="report-title">3. Confidence Analysis</h3>
+          <p class="tutorial-text">
+            Indicates how confident the system is in its prediction. Higher confidence scores (closer to 100%) suggest more reliable predictions. Lower confidence might indicate unusual applicant profiles or missing data.
+          </p>
+        </div>
+        <div class="report-section">
+          <h3 class="report-title">4. Comparative Context</h3>
+          <p class="tutorial-text">
+            Shows how this applicant compares to similar profiles in the historical database. This provides context for understanding whether the risk level is typical for this type of application.
+          </p>
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">3</span>
+        <h2 class="tutorial-step-title">Confidence Intervals and Uncertainty</h2>
+        <p class="tutorial-text">
+          No prediction is 100% certain. CreditMetrics provides confidence intervals to help you understand the range of possible outcomes and the reliability of each prediction.
+        </p>
+        <p class="tutorial-text">
+          The confidence interval represents the range within which the true default probability is likely to fall. For example:
+        </p>
+        <ul class="tutorial-text">
+          <li>A prediction of 15% default probability with a confidence interval of ±3% means the true risk is likely between 12% and 18%</li>
+          <li>A wider confidence interval (e.g., ±8%) indicates greater uncertainty in the prediction</li>
+        </ul>
+        <p class="tutorial-text">
+          Factors that influence confidence intervals include:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Data completeness:</strong> More complete applicant profiles yield narrower confidence intervals</li>
+          <li><strong>Historical precedent:</strong> Common applicant profiles have narrower intervals than unusual ones</li>
+          <li><strong>Contradictory signals:</strong> When different attributes suggest conflicting risk levels, uncertainty increases</li>
+        </ul>
+        <div class="tutorial-note">
+          <strong>Important:</strong> Applications with high uncertainty may warrant additional manual review, even if the predicted risk is low.
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">4</span>
+        <h2 class="tutorial-step-title">Risk-Based Decision Making</h2>
+        <p class="tutorial-text">
+          CreditMetrics provides risk assessments, but the final lending decision remains with your bank. Here are recommended strategies for incorporating risk assessments into your decision-making:
+        </p>
+        <div class="table-responsive">
+          <table class="decision-table">
+            <thead>
+              <tr>
+                <th>Risk Category</th>
+                <th>Recommended Action</th>
+                <th>Additional Considerations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="decision-low">Low Risk (0-10%)</span></td>
+                <td>Approve with standard terms</td>
+                <td>Consider preferential rates for extremely low-risk applications</td>
+              </tr>
+              <tr>
+                <td><span class="decision-medium">Medium Risk (11-30%)</span></td>
+                <td>Conditional approval</td>
+                <td>
+                  Consider:
+                  <ul>
+                    <li>Additional collateral</li>
+                    <li>Higher down payment</li>
+                    <li>Shorter loan term</li>
+                    <li>Risk-based pricing</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="decision-high">High Risk (31-100%)</span></td>
+                <td>Elevated scrutiny or denial</td>
+                <td>
+                  If considering approval:
+                  <ul>
+                    <li>Require substantial guarantees</li>
+                    <li>Apply significant risk premiums</li>
+                    <li>Verify all information thoroughly</li>
+                    <li>Consider smaller initial loan amount</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tutorial-text">
+          Many banks implement hybrid decision processes:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Automated approvals:</strong> Very low-risk applications are automatically approved</li>
+          <li><strong>Automated denials:</strong> Very high-risk applications are automatically denied</li>
+          <li><strong>Manual review:</strong> Applications in the middle range or with unusual profiles receive human review</li>
+        </ul>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">5</span>
+        <h2 class="tutorial-step-title">Batch Analysis and Portfolio Risk</h2>
+        <p class="tutorial-text">
+          Beyond individual applications, CreditMetrics enables portfolio-level risk analysis. When conducting batch analyses, you receive additional insights:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Risk distribution:</strong> See how risk is distributed across your loan portfolio</li>
+          <li><strong>Risk concentration:</strong> Identify whether risk is concentrated in specific segments</li>
+          <li><strong>Expected default rate:</strong> Calculate the aggregate expected default rate across the portfolio</li>
+          <li><strong>Risk factors analysis:</strong> Discover common risk factors affecting your customer base</li>
+        </ul>
+        <p class="tutorial-text">
+          These portfolio insights help with strategic planning, including:
+        </p>
+        <ul class="tutorial-text">
+          <li>Setting appropriate interest rates based on risk profiles</li>
+          <li>Adjusting marketing and outreach to target preferred risk segments</li>
+          <li>Planning for potential default scenarios</li>
+          <li>Making capital reserve decisions</li>
+        </ul>
+        <img src="{{ url_for('static', filename='images/portfolio_analysis.jpg') }}" alt="Portfolio Risk Analysis" class="tutorial-image" onerror="this.src='https://via.placeholder.com/800x400?text=Portfolio+Risk+Analysis'">
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">6</span>
+        <h2 class="tutorial-step-title">Exporting and Integrating Results</h2>
+        <p class="tutorial-text">
+          CreditMetrics offers multiple ways to export and integrate risk assessment results into your existing systems:
+        </p>
+        <h3 class="section-subheading">Export Options</h3>
+        <ul class="tutorial-text">
+          <li><strong>PDF Reports:</strong> Comprehensive reports suitable for documentation and regulatory purposes</li>
+          <li><strong>CSV/Excel:</strong> Tabular data for further analysis and integration with spreadsheet tools</li>
+          <li><strong>JSON/API:</strong> Structured data for direct integration with your banking systems</li>
+        </ul>
+        <h3 class="section-subheading">Integration Points</h3>
+        <p class="tutorial-text">
+          Common integration scenarios include:
+        </p>
+        <ul class="tutorial-text">
+          <li>Incorporating risk scores directly into your loan processing system</li>
+          <li>Feeding risk data into your customer relationship management (CRM) platform</li>
+          <li>Adding risk insights to management dashboards</li>
+          <li>Including risk assessments in regulatory reporting</li>
+        </ul>
+        <div class="tutorial-note">
+          <strong>Note:</strong> Our technical integration team can assist with custom API implementations and data workflow design. Contact support for integration assistance.
+        </div>
+      </div>
+
+      <div class="tutorial-nav">
+        <a href="{{ url_for('tutorial', page=2) }}" class="btn btn-secondary">Previous: Understanding the ML Model</a>
+        <a href="{{ url_for('analyzeproduct') }}" class="btn btn-primary">Back to Overview</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Footer for logged-in users -->
+  {% include 'components/footer_loggedin.html' %}
+</body>
+</html> 

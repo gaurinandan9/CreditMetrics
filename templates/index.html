@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CreditMetrics</title>
+  <meta property="og:title" content="CreditMetrics" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <style data-tag="reset-style-sheet">
+    html {
+      line-height: 1.15;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-width: 0;
+      border-style: solid;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    p,
+    li,
+    ul,
+    pre,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    figure,
+    blockquote,
+    figcaption {
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      background-color: transparent;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    button,
+    select {
+      text-transform: none;
+    }
+
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"] {
+      -webkit-appearance: button;
+      appearance: button;
+      color: inherit;
+    }
+
+    button::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+      border-style: none;
+      padding: 0;
+    }
+
+    button:-moz-focus,
+    [type="button"]:-moz-focus,
+    [type="reset"]:-moz-focus,
+    [type="submit"]:-moz-focus {
+      outline: 1px dotted ButtonText;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    input {
+      padding: 2px 4px;
+    }
+
+    img {
+      display: block;
+    }
+
+    details {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    [data-thq="accordion"] [data-thq="accordion-content"] {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+      padding: 0;
+    }
+
+    [data-thq="accordion"] details[data-thq="accordion-trigger"][open]+[data-thq="accordion-content"] {
+      max-height: 1000vh;
+    }
+
+    details[data-thq="accordion-trigger"][open] summary [data-thq="accordion-icon"] {
+      transform: rotate(180deg);
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+  </style>
+  <style data-tag="default-style-sheet">
+    html {
+      font-family: Inter;
+      font-size: 16px;
+    }
+
+    body {
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.15;
+      color: var(--dl-color-theme-neutral-dark);
+      background: var(--dl-color-theme-neutral-light);
+
+      fill: var(--dl-color-theme-neutral-dark);
+    }
+
+    a.thq-button-filled,
+    a.thq-button-outline,
+    a.thq-button-animated {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" /> -->
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+  <link href="{{ url_for('static', filename='components/navbar8.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='components/features24.css') }}" rel="stylesheet" />
+
+  <style>
+    /* Fix clickability issues across the site */
+    a, button, .hero17-button1, .hero17-button2, .cta26-button, .steps2-button, 
+    [class*="button"], [class*="btn"] {
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      position: relative !important;
+      z-index: 10 !important;
+    }
+    
+    /* Make text selectable */
+    p, span, h1, h2, h3, h4, h5, h6, div {
+      user-select: text !important;
+    }
+    
+    /* Remove any potential blocking overlays */
+    body::before, body::after,
+    .home-container::before, .home-container::after,
+    [class*="-wrapper"]::before, [class*="-wrapper"]::after {
+      display: none !important;
+      pointer-events: none !important;
+    }
+    
+    /* Ensure clicks pass through to actual elements */
+    body {
+      pointer-events: auto !important;
+    }
+    
+    /* Force interactive elements to be interactive */
+    a, button, [role="button"] {
+      -webkit-touch-callout: default !important;
+      -webkit-user-select: auto !important;
+      user-select: auto !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <link rel="stylesheet" href="./style.css" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <div id="navbar-placeholder"></div>
+
+  <script>
+    fetch("{{ url_for('serve_component', component_name='navbar8.html') }}")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => { 
+        document.getElementById("navbar-placeholder").innerHTML = data;
+      })
+      .catch(error => console.error("Error loading navbar:", error));            
+  </script>
+
+  <div>
+    <link href="./index.css" rel="stylesheet" />
+
+    <div class="home-container">
+      <hero17-wrapper class="hero17-wrapper">
+        <!--Hero17 component-->
+        <div class="hero17-header78">
+          <div class="hero17-column thq-section-padding thq-section-max-width">
+            <div class="hero17-content1">
+              <h1 class="hero17-text1 thq-heading-1">
+                <fragment class="home-fragment116">
+                  <span class="home-text118">
+                    Empower Your Risk Analysis with CreditMetric
+                  </span>
+                </fragment>
+              </h1>
+            </div>
+            <div class="hero17-actions">
+              <a href="{{ url_for('contact') }}" class="thq-button-filled hero17-button1">
+                <span class="thq-body-small">
+                  <fragment class="home-fragment114">
+                    <span class="home-text116">Get Started</span>
+                  </fragment>
+                </span>
+              </a>
+              <a href="#features" class="thq-button-outline hero17-button2">
+                <span class="thq-body-small">
+                  <fragment class="home-fragment115">
+                    <span class="home-text117">Learn More</span>
+                  </fragment>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="hero17-content2">
+            <div class="hero17-row-container1 thq-animated-group-container-horizontal thq-mask-image-horizontal">
+              <div class="thq-animated-group-horizontal">
+                <img
+                  src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDF8fHJpc2slMjBhbmFseXNpc3xlbnwwfHx8fDE3Mzk5NTM5ODV8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image10 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDV8fHJpc2slMjBhbmFseXNpc3xlbnwwfHx8fDE3Mzk5NTM5ODV8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image11 thq-img-scale thq-img-ratio-1-1" />
+                <img
+                  src="https://images.unsplash.com/photo-1731910051936-eebb9eb8390c?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDF8fGxvYW4lMjBkZWZhdWx0fGVufDB8fHx8MTczOTg3MjUwMHww&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image12 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1554260570-e9689a3418b8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAzMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image13 thq-img-scale thq-img-ratio-1-1" />
+                <img
+                  src="https://images.unsplash.com/photo-1624811532681-e58a7e25f273?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDd8fGNyZWRpdHxlbnwwfHx8fDE3Mzk5NTQ2NTZ8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image14 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1573496546038-82f9c39f6365?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyOXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image15 thq-img-scale thq-img-ratio-1-1" />
+              </div>
+              <div class="thq-animated-group-horizontal">
+                <img alt="Risk Analysis Platform Image"
+                  src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&amp;w=1470&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero17-placeholder-image16 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDV8fHJpc2slMjBhbmFseXNpc3xlbnwwfHx8fDE3Mzk5NTM5ODV8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image17 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1682756540097-6a887bbcf9b0?q=80&amp;w=1471&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero17-placeholder-image18 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1554260570-e9689a3418b8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAzMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image19 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1723534792097-e834ec98d5ca?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAzMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image20 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1534312527009-56c7016453e6?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDIxfHxhYnN0cmFjdHxlbnwwfHx8fDE3MTA4NzA5MzB8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image21 thq-img-scale thq-img-ratio-1-1" />
+              </div>
+            </div>
+            <div class="hero17-row-container2 thq-animated-group-container-horizontal thq-mask-image-horizontal">
+              <div class="thq-animated-group-horizontal-reverse">
+                <img
+                  src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDE3fHxiYW5rJTIwbG9hbnxlbnwwfHx8fDE3Mzk5NTQ0MzR8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image22 thq-img-scale thq-img-ratio-1-1" />
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1681487767138-ddf2d67b35c1?q=80&amp;w=1555&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  loading="eager" class="hero17-placeholder-image23 thq-img-scale thq-img-ratio-1-1" />
+                <img
+                  src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDJ8fGxvYW58ZW58MHx8fHwxNzM5OTU0NDgzfDA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image24 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1444653389962-8149286c578a?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAzMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image25 thq-img-scale thq-img-ratio-1-1" />
+                <img
+                  src="https://images.unsplash.com/photo-1556741576-1d17b478d761?ixid=M3w5MTMyMXwxfDF8c2VhcmNofDF8fG5vJTIwbW9uZXl8ZW58MHx8fHwxNzM5OTU0Njg0fDA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image26 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1616803140344-6682afb13cda?q=80&amp;w=1470&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero17-placeholder-image27 thq-img-scale thq-img-ratio-1-1" />
+              </div>
+              <div class="thq-animated-group-horizontal-reverse">
+                <img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1672423156257-9a2bc5e1f480?w=500&amp;auto=format&amp;fit=crop&amp;q=60&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFua3N8ZW58MHx8MHx8fDA%3D"
+                  class="hero17-placeholder-image28 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAzMXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image29 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1495592822108-9e6261896da8?q=80&amp;w=1470&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero17-placeholder-image30 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1444653389962-8149286c578a?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAzMnw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                  class="hero17-placeholder-image31 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&amp;w=1470&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero17-placeholder-image32 thq-img-scale thq-img-ratio-1-1" />
+                <img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1568214379698-8aeb8c6c6ac8?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDEyfHxncmFmaWN8ZW58MHx8fHwxNzE1Nzk0OTk5fDA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero17-placeholder-image33 thq-img-scale thq-img-ratio-1-1" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="hero17-container2">
+              <style>
+                @keyframes scroll-x {
+                  from {
+                    transform: translateX(0);
+                  }
+
+                  to {
+                    transform: translateX(calc(-100% - 16px));
+                  }
+                }
+
+                @keyframes scroll-y {
+                  from {
+                    transform: translateY(0);
+                  }
+
+                  to {
+                    transform: translateY(calc(-100% - 16px));
+                  }
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+      </hero17-wrapper>
+      
+      
+      <cta26-wrapper class="cta26-wrapper">
+        <!--CTA26 component-->
+        <div class="thq-section-padding">
+          <div class="thq-section-max-width">
+            <div class="cta26-accent2-bg">
+              <div class="cta26-accent1-bg">
+                <div class="cta26-container2">
+                  <div class="cta26-content">
+                    <span class="thq-heading-2">
+                      <fragment class="home-fragment125">
+                        <span class="home-text127">
+                          Take control of your loan risk analysis
+                        </span>
+                      </fragment>
+                    </span>
+                    <p class="thq-body-large">
+                      <fragment class="home-fragment124">
+                        <span class="home-text126">
+                          Our professional platform provides comprehensive
+                          tools for assessing default risk in loans,
+                          empowering banks to make informed decisions.
+                        </span>
+                      </fragment>
+                    </p>
+                  </div>
+                  <div class="cta26-actions">
+                    <a href="{{ url_for('contact') }}" class="thq-button-filled cta26-button">
+                      <span>
+                        <fragment class="home-fragment123">
+                          <span class="home-text125">
+                            Start analyzing risk now
+                          </span>
+                        </fragment>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </cta26-wrapper>
+      <features25-wrapper id="features" class="features25-wrapper">
+        <!--Features25 component-->
+        <div class="thq-section-padding">
+          <div class="features25-container2 thq-section-max-width">
+            <div class="features25-tabs-menu">
+              <div class="features25-tab-horizontal1">
+                <div class="features25-divider-container1">
+                  <div class="features25-container3"></div>
+                </div>
+                <div class="features25-content1">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment126">
+                      <span class="home-text128">Analytics Dashboard</span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="home-fragment129">
+                      <span class="home-text131">
+                        Dashboards offering heatmaps, trend forecasts, and
+                        instant decision-making tools.
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+              </div>
+              <div class="features25-tab-horizontal2">
+                <div class="features25-divider-container2">
+                  <div class="features25-container4"></div>
+                </div>
+                <div class="features25-content2">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment127">
+                      <span class="home-text129">
+                        Explainable AI Decisions
+                      </span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="home-fragment130">
+                      <span class="home-text132">
+                        Instant, Transparent, and Explainable AI Decisions.
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+              </div>
+              <div class="features25-tab-horizontal3">
+                <div class="features25-divider-container3">
+                  <div class="features25-container5"></div>
+                </div>
+                <div class="features25-content3">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment128">
+                      <span class="home-text130">
+                        Built for Indian Markets
+                      </span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="home-fragment131">
+                      <span class="home-text133">
+                        We analyze local economic trends, MSME risk factors,
+                        and unstructured financial data.
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="features25-image-container">
+              <img
+                src="https://media.istockphoto.com/id/1163096935/photo/corruption-and-bribery-businessman-manager-refusing-receive-money-from-business-man-passing.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=DkcPNfbG-HDW8U-ckisXHZDrkWNVWUF2Ls28Wh6tz8I="
+                class="features25-image1 thq-img-ratio-16-9" />
+              <img alt="Customizable Parameters Image"
+                src="https://images.unsplash.com/photo-1564859125999-183f0fc1f3b5?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyOXw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                class="features25-image2 thq-img-ratio-16-9" />
+              <img alt="Real-time Monitoring Image"
+                src="https://images.unsplash.com/photo-1553830591-d8632a99e6ff?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyOHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                class="features25-image3 thq-img-ratio-16-9" />
+            </div>
+          </div>
+        </div>
+      </features25-wrapper>
+      <!-- <pricing14-wrapper class="pricing14-wrapper">
+          <div class="pricing14-pricing23 thq-section-padding">
+            <div class="pricing14-max-width thq-section-max-width">
+              <div class="pricing14-section-title">
+                <span class="pricing14-text100 thq-body-small">
+                  <fragment class="home-fragment138">
+                    <span class="home-text140">
+                      Choose the perfect plan for you
+                    </span>
+                  </fragment>
+                </span>
+                <div class="pricing14-content">
+                  <h2 class="pricing14-text101 thq-heading-2">
+                    <fragment class="home-fragment140">
+                      <span class="home-text142">
+                        Choose the plan that suits your needs best
+                      </span>
+                    </fragment>
+                  </h2>
+                  <p class="pricing14-text102 thq-body-large">
+                    <fragment class="home-fragment139">
+                      <span class="home-text141">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      </span>
+                    </fragment>
+                  </p>
+                </div>
+              </div>
+              <div class="pricing14-tabs">
+                <button
+                  class="pricing14-button10 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">Monthly</span>
+                </button>
+                <button
+                  class="pricing14-button11 thq-button-outline thq-button-animated"
+                >
+                  <span class="thq-body-small">Monthly</span>
+                </button>
+                <button
+                  class="pricing14-button12 thq-button-filled thq-button-animated"
+                >
+                  <span class="thq-body-small">Yearly</span>
+                </button>
+                <button
+                  class="pricing14-button13 thq-button-outline thq-button-animated"
+                >
+                  <span class="thq-body-small">Yearly</span>
+                </button>
+              </div>
+              <div class="pricing14-container1">
+                <div class="pricing14-column1 thq-card">
+                  <div class="pricing14-price10">
+                    <div class="pricing14-price11">
+                      <p class="pricing14-text107 thq-body-large">
+                        <fragment class="home-fragment132">
+                          <span class="home-text134">Basic plan</span>
+                        </fragment>
+                      </p>
+                      <h3 class="pricing14-text108 thq-heading-3">
+                        <fragment class="home-fragment141">
+                          <span class="home-text143">
+                            Basic Plan: $99/month
+                          </span>
+                        </fragment>
+                      </h3>
+                      <p class="thq-body-large">
+                        <fragment class="home-fragment146">
+                          <span class="home-text148">or $200 yearly</span>
+                        </fragment>
+                      </p>
+                    </div>
+                    <div class="pricing14-list1">
+                      <div class="pricing14-list-item10">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment159">
+                            <span class="home-text161">
+                              Risk assessment for up to 100 loans per month
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item11">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment160">
+                            <span class="home-text162">Email support</span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item12">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment161">
+                            <span class="home-text163">Monthly billing</span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="pricing14-button14 thq-button-outline thq-button-animated"
+                  >
+                    <span class="thq-body-small">
+                      <fragment class="home-fragment144">
+                        <span class="home-text146">Sign up now</span>
+                      </fragment>
+                    </span>
+                  </button>
+                </div>
+                <div class="pricing14-column2 thq-card">
+                  <div class="pricing14-price12">
+                    <div class="pricing14-price13">
+                      <p class="pricing14-text114 thq-body-large">
+                        <fragment class="home-fragment133">
+                          <span class="home-text135">Business plan</span>
+                        </fragment>
+                      </p>
+                      <h3 class="pricing14-text115 thq-heading-3">
+                        <fragment class="home-fragment142">
+                          <span class="home-text144">
+                            Standard Plan: $199/month
+                          </span>
+                        </fragment>
+                      </h3>
+                      <p class="thq-body-large">
+                        <fragment class="home-fragment149">
+                          <span class="home-text151">or $299 yearly</span>
+                        </fragment>
+                      </p>
+                    </div>
+                    <div class="pricing14-list2">
+                      <div class="pricing14-list-item13">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment162">
+                            <span class="home-text164">
+                              Risk assessment for up to 500 loans per month
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item14">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment163">
+                            <span class="home-text165">
+                              Phone and email support
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item15">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment164">
+                            <span class="home-text166">Monthly billing</span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item16">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment165">
+                            <span class="home-text167">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="pricing14-button15 thq-button-filled thq-button-animated"
+                  >
+                    <span class="thq-body-small">
+                      <fragment class="home-fragment147">
+                        <span class="home-text149">Sign up now</span>
+                      </fragment>
+                    </span>
+                  </button>
+                </div>
+                <div class="pricing14-column3 thq-card">
+                  <div class="pricing14-price14">
+                    <div class="pricing14-price15">
+                      <p class="pricing14-text122 thq-body-large">
+                        <fragment class="home-fragment134">
+                          <span class="home-text136">Enterprise plan</span>
+                        </fragment>
+                      </p>
+                      <h3 class="pricing14-text123 thq-heading-3">
+                        <fragment class="home-fragment143">
+                          <span class="home-text145">
+                            Premium Plan: $399/month
+                          </span>
+                        </fragment>
+                      </h3>
+                      <p class="thq-body-large">
+                        <fragment class="home-fragment152">
+                          <span class="home-text154">or $499 yearly</span>
+                        </fragment>
+                      </p>
+                    </div>
+                    <div class="pricing14-list3">
+                      <div class="pricing14-list-item17">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment166">
+                            <span class="home-text168">
+                              Unlimited risk assessments
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item18">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment167">
+                            <span class="home-text169">
+                              Priority phone and email support
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item19">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment168">
+                            <span class="home-text170">
+                              Customizable reporting
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item20">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment169">
+                            <span class="home-text171">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item21">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment170">
+                            <span class="home-text172">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="pricing14-button16 thq-button-filled thq-button-animated"
+                  >
+                    <span class="thq-body-small">
+                      <fragment class="home-fragment150">
+                        <span class="home-text152">Sign up now</span>
+                      </fragment>
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div class="pricing14-container2">
+                <div class="pricing14-column4 thq-card">
+                  <div class="pricing14-price16">
+                    <div class="pricing14-price17">
+                      <span class="pricing14-text131 thq-body-large">
+                        <fragment class="home-fragment135">
+                          <span class="home-text137">Basic plan</span>
+                        </fragment>
+                      </span>
+                      <h3 class="pricing14-text132 thq-heading-3">
+                        <fragment class="home-fragment145">
+                          <span class="home-text147">$200/yr</span>
+                        </fragment>
+                      </h3>
+                      <span class="thq-body-large">
+                        <fragment class="home-fragment154">
+                          <span class="home-text156">or $20 monthly</span>
+                        </fragment>
+                      </span>
+                    </div>
+                    <div class="pricing14-list4">
+                      <div class="pricing14-list-item22">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment171">
+                            <span class="home-text173">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item23">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment172">
+                            <span class="home-text174">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item24">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment173">
+                            <span class="home-text175">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="pricing14-button17 thq-button-outline thq-button-animated"
+                  >
+                    <span class="thq-body-small">
+                      <fragment class="home-fragment153">
+                        <span class="home-text155">Get started</span>
+                      </fragment>
+                    </span>
+                  </button>
+                </div>
+                <div class="pricing14-column5 thq-card">
+                  <div class="pricing14-price18">
+                    <div class="pricing14-price19">
+                      <span class="pricing14-text138 thq-body-large">
+                        <fragment class="home-fragment136">
+                          <span class="home-text138">Business plan</span>
+                        </fragment>
+                      </span>
+                      <h3 class="pricing14-text139 thq-heading-3">
+                        <fragment class="home-fragment148">
+                          <span class="home-text150">$299/yr</span>
+                        </fragment>
+                      </h3>
+                      <span class="thq-body-large">
+                        <fragment class="home-fragment156">
+                          <span class="home-text158">or $29 monthly</span>
+                        </fragment>
+                      </span>
+                    </div>
+                    <div class="pricing14-list5">
+                      <div class="pricing14-list-item25">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment174">
+                            <span class="home-text176">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item26">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment175">
+                            <span class="home-text177">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item27">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment176">
+                            <span class="home-text178">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item28">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment177">
+                            <span class="home-text179">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="pricing14-button18 thq-button-filled thq-button-animated"
+                  >
+                    <span class="thq-body-small">
+                      <fragment class="home-fragment155">
+                        <span class="home-text157">Get started</span>
+                      </fragment>
+                    </span>
+                  </button>
+                </div>
+                <div class="pricing14-column6 thq-card">
+                  <div class="pricing14-price20">
+                    <div class="pricing14-price21">
+                      <span class="pricing14-text146 thq-body-large">
+                        <fragment class="home-fragment137">
+                          <span class="home-text139">Enterprise plan</span>
+                        </fragment>
+                      </span>
+                      <h3 class="pricing14-text147 thq-heading-3">
+                        <fragment class="home-fragment151">
+                          <span class="home-text153">$499/yr</span>
+                        </fragment>
+                      </h3>
+                      <span class="thq-body-large">
+                        <fragment class="home-fragment158">
+                          <span class="home-text160">or $49 monthly</span>
+                        </fragment>
+                      </span>
+                    </div>
+                    <div class="pricing14-list6">
+                      <div class="pricing14-list-item29">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment178">
+                            <span class="home-text180">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item30">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment179">
+                            <span class="home-text181">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item31">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment180">
+                            <span class="home-text182">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item32">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment181">
+                            <span class="home-text183">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                      <div class="pricing14-list-item33">
+                        <svg viewBox="0 0 1024 1024" class="thq-icon-small">
+                          <path
+                            d="M384 690l452-452 60 60-512 512-238-238 60-60z"
+                          ></path>
+                        </svg>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment182">
+                            <span class="home-text184">
+                              Feature text goes here
+                            </span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    class="pricing14-button19 thq-button-filled thq-button-animated"
+                  >
+                    <span class="thq-body-small">
+                      <fragment class="home-fragment157">
+                        <span class="home-text159">Get started</span>
+                      </fragment>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </pricing14-wrapper> -->
+      <steps2-wrapper class="steps2-wrapper">
+        <!--Steps2 component-->
+        <div class="steps2-container1 thq-section-padding">
+          <div class="steps2-max-width thq-section-max-width">
+            <div class="steps2-container2 thq-grid-2">
+              <div class="steps2-section-header">
+                <h2 class="thq-heading-2">
+                  Discover the Power of Our Products
+                </h2>
+                <p class="thq-body-large">
+                  Get accurate customer and loan default risk analysis results
+                  in just a few simple steps using our cutting-edge analytical
+                  dashboards. Our product is powered by advanced models for
+                  risk analysis, ensuring top-notch results in the industry.
+                </p>
+                <div class="steps2-actions">
+                  <a href="{{ url_for('contact') }}" class="thq-button-filled thq-button-animated steps2-button">
+                    <span class="thq-body-small">Get Started</span>
+                  </a>
+                </div>
+              </div>
+              <div class="steps2-container3">
+                <div class="steps2-container4 thq-card">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment183">
+                      <span class="home-text185">Create Account</span>
+                    </fragment>
+                  </h2>
+                  <span class="steps2-text14 thq-body-small">
+                    <fragment class="home-fragment187">
+                      <span class="home-text189">
+                        Sign up for an account on our platform to access our
+                        risk analysis tools.
+                      </span>
+                    </fragment>
+                  </span>
+                  <label class="steps2-text15 thq-heading-3">01</label>
+                </div>
+                <div class="steps2-container5 thq-card">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment184">
+                      <span class="home-text186">Upload Data</span>
+                    </fragment>
+                  </h2>
+                  <span class="steps2-text17 thq-body-small">
+                    <fragment class="home-fragment188">
+                      <span class="home-text190">
+                        Upload loan data and borrower information securely to
+                        our platform.
+                      </span>
+                    </fragment>
+                  </span>
+                  <label class="steps2-text18 thq-heading-3">02</label>
+                </div>
+                <div class="steps2-container6 thq-card">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment185">
+                      <span class="home-text187">Run Analysis</span>
+                    </fragment>
+                  </h2>
+                  <span class="steps2-text20 thq-body-small">
+                    <fragment class="home-fragment189">
+                      <span class="home-text191">
+                        Our advanced algorithms will analyze the data to
+                        assess the risk of loan default.
+                      </span>
+                    </fragment>
+                  </span>
+                  <label class="steps2-text21 thq-heading-3">03</label>
+                </div>
+                <div class="steps2-container7 thq-card">
+                  <h2 class="thq-heading-2">
+                    <fragment class="home-fragment186">
+                      <span class="home-text188">Receive Report</span>
+                    </fragment>
+                  </h2>
+                  <span class="steps2-text23 thq-body-small">
+                    <fragment class="home-fragment190">
+                      <span class="home-text192">
+                        Get detailed reports and insights to make informed
+                        decisions on loan approvals.
+                      </span>
+                    </fragment>
+                  </span>
+                  <label class="steps2-text24 thq-heading-3">04</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </steps2-wrapper>
+      <testimonial17-wrapper class="testimonial17-wrapper">
+        <!--Testimonial17 component-->
+        <div class="thq-section-padding">
+          <div class="testimonial17-max-width thq-section-max-width">
+            <div class="testimonial17-container10">
+              <h2 class="thq-heading-2">
+                <fragment class="home-fragment196">
+                  <span class="home-text198">Client Testimonials</span>
+                </fragment>
+              </h2>
+              <span class="testimonial17-text11 thq-body-small">
+                <fragment class="home-fragment195">
+                  <span class="home-text197">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </span>
+                </fragment>
+              </span>
+            </div>
+            <div class="thq-grid-2">
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div data-animated="true" class="thq-card testimonial17-card1">
+                    <div class="testimonial17-container12">
+                      <img alt="Image of John Doe"
+                        src="https://images.unsplash.com/photo-1636041282783-e218bb0a217b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyN3w&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image1" />
+                      <div class="testimonial17-container13">
+                        <strong class="thq-body-large">
+                          <fragment class="home-fragment197">
+                            <span class="home-text199">Purva</span>
+                          </fragment>
+                        </strong>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment201">
+                            <span class="home-text203">CEO, SBI Bank</span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text14 thq-body-small">
+                      <fragment class="home-fragment191">
+                        <span class="home-text193">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua.
+                        </span>
+                      </fragment>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div data-animated="true" class="thq-card testimonial17-card2">
+                    <div class="testimonial17-container14">
+                      <img alt="Image of Jane Smith"
+                        src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyOHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image2" />
+                      <div class="testimonial17-container15">
+                        <strong class="thq-body-large">
+                          <fragment class="home-fragment198">
+                            <span class="home-text200">Atharv</span>
+                          </fragment>
+                        </strong>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment202">
+                            <span class="home-text204">CFO, Axis Bank</span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text17 thq-body-small">
+                      <fragment class="home-fragment192">
+                        <span class="home-text194">
+                          Ut enim ad minim veniam, quis nostrud exercitation
+                          ullamco laboris nisi ut aliquip ex ea commodo
+                          consequat.
+                        </span>
+                      </fragment>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div data-animated="true" class="thq-card testimonial17-card3">
+                    <div class="testimonial17-container16">
+                      <img alt="Image of Michael Johnson"
+                        src="https://images.unsplash.com/photo-1556483563-7f4034a4eeb0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyOHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image3" />
+                      <div class="testimonial17-container17">
+                        <strong class="thq-body-large">
+                          <fragment class="home-fragment199">
+                            <span class="home-text201">Anjali</span>
+                          </fragment>
+                        </strong>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment203">
+                            <span class="home-text205">COO, HDFC Bank</span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text20 thq-body-small">
+                      <fragment class="home-fragment193">
+                        <span class="home-text195">
+                          Duis aute irure dolor in reprehenderit in voluptate
+                          velit esse cillum dolore eu fugiat nulla pariatur.
+                        </span>
+                      </fragment>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="thq-animated-card-bg-2">
+                <div class="thq-animated-card-bg-1">
+                  <div data-animated="true" class="thq-card testimonial17-card4">
+                    <div class="testimonial17-container18">
+                      <img alt="Image of Emily Brown"
+                        src="https://images.unsplash.com/photo-1622565838335-94486df09d92?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTczOTg3MDAyN3w&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                        class="testimonial17-image4" />
+                      <div class="testimonial17-container19">
+                        <strong class="thq-body-large">
+                          <fragment class="home-fragment200">
+                            <span class="home-text202">Dhanashree</span>
+                          </fragment>
+                        </strong>
+                        <span class="thq-body-small">
+                          <fragment class="home-fragment204">
+                            <span class="home-text206">CIO, ICICI Bank</span>
+                          </fragment>
+                        </span>
+                      </div>
+                    </div>
+                    <span class="testimonial17-text23 thq-body-small">
+                      <fragment class="home-fragment194">
+                        <span class="home-text196">
+                          Excepteur sint occaecat cupidatat non proident, sunt
+                          in culpa qui officia deserunt mollit anim id est
+                          laborum.
+                        </span>
+                      </fragment>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </testimonial17-wrapper>
+
+      <stats21-wrapper class="stats21-wrapper">
+        <!--Stats21 component-->
+        <div class="stats21-container1 thq-section-padding">
+          <div class="stats21-max-width thq-section-max-width">
+            <div class="stats21-container2 thq-flex-column">
+              <img alt="Customizable Risk Assessment Image"
+                src="https://plus.unsplash.com/premium_photo-1723662072925-1a4ed995bdf4?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="thq-img-ratio-1-1 stats21-image" />
+            </div>
+            <div class="stats21-container3 thq-flex-column">
+              <!-- <span class="thq-body-small">
+                  <fragment class="contact-fragment38">
+                    <span class="contact-text40">
+                      Tailor risk assessment criteria to suit your specific
+                      needs
+                    </span>
+                  </fragment>
+                </span> -->
+              <h2 class="thq-heading-2">
+                <fragment class="contact-fragment40">
+                  <span class="contact-text42">Statistics</span>
+                </fragment>
+              </h2>
+              <p class="thq-body-large">
+                <fragment class="contact-fragment39">
+                  <span class="contact-text41">
+                    Analyze borrower behavior and financial indicators for
+                    accurate predictions
+                  </span>
+                </fragment>
+              </p>
+              <div class="stats21-container4 thq-grid-2">
+                <div class="stats21-container5">
+                  <h2 class="thq-heading-2">
+                    <fragment class="contact-fragment34">
+                      <span class="contact-text36">
+                        Customizable Risk Assessment
+                      </span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="contact-fragment41">
+                      <span class="contact-text43">
+                        Tailor risk assessment models to your specific
+                        requirements
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+                <div class="stats21-container6">
+                  <h2 class="thq-heading-2">
+                    <fragment class="contact-fragment35">
+                      <span class="contact-text37">Client Testimonials</span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="contact-fragment42">
+                      <span class="contact-text44">
+                        Empower banks to make informed decisions
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+              </div>
+              <div class="stats21-container7 thq-grid-2">
+                <div class="stats21-container8">
+                  <h2 class="thq-heading-2">
+                    <fragment class="contact-fragment36">
+                      <span class="contact-text38">Real-Time Monitoring</span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="contact-fragment43">
+                      <span class="contact-text45">
+                        Monitor risk factors in real-time to stay ahead of
+                        potential defaults
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+                <div class="stats21-container9">
+                  <h2 class="thq-heading-2">
+                    <fragment class="contact-fragment37">
+                      <span class="contact-text39">
+                        Different Pricing Plans
+                      </span>
+                    </fragment>
+                  </h2>
+                  <span class="thq-body-small">
+                    <fragment class="contact-fragment44">
+                      <span class="contact-text46">
+                        Choose from a variety of pricing plans to fit your
+                        budget
+                      </span>
+                    </fragment>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="footer-placeholder"></div>
+
+      </stats21-wrapper>
+
+      <script>
+        fetch("{{ url_for('serve_component', component_name='footer41.html') }}")
+          .then(response => {
+            return response.text()
+          })
+          .then(data => {
+            document.getElementById("footer-placeholder").innerHTML = data;
+          })
+          .catch(error => console.error("Error loading footer:", error));            
+      </script>
+
+
+    </div>
+  </div>
+  <script defer="" src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+  <script>
+    // Make hero section buttons clickable
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get Started button
+      const getStartedBtns = document.querySelectorAll('.hero17-button1, .cta26-button, .steps2-button');
+      getStartedBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          window.location.href = "{{ url_for('contact') }}";
+        });
+      });
+      
+      // Learn More button
+      const learnMoreBtn = document.querySelector('.hero17-button2');
+      if (learnMoreBtn) {
+        learnMoreBtn.addEventListener('click', function() {
+          const featuresSection = document.getElementById('features');
+          if (featuresSection) {
+            featuresSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+    });
+
+    // Global fix for clickable elements
+    document.addEventListener('DOMContentLoaded', function() {
+      // Make all buttons and links clickable
+      const clickableElements = document.querySelectorAll('a, button, [role="button"]');
+      
+      clickableElements.forEach(el => {
+        // Remove any potential event blockers
+        el.style.pointerEvents = 'auto';
+        el.style.position = 'relative';
+        el.style.zIndex = '100';
+        
+        // Ensure footer links work
+        if (el.closest('#footer-placeholder')) {
+          el.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href) {
+              e.preventDefault();
+              window.location.href = href;
+            }
+          });
+        }
+      });
+      
+      // Special handling for footer links after they're loaded
+      const footerObserver = new MutationObserver(function(mutations) {
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder && footerPlaceholder.children.length > 0) {
+          const footerLinks = footerPlaceholder.querySelectorAll('a');
+          footerLinks.forEach(link => {
+            link.style.pointerEvents = 'auto';
+            link.style.position = 'relative';
+            link.style.zIndex = '100';
+            
+            link.addEventListener('click', function(e) {
+              const href = this.getAttribute('href');
+              if (href) {
+                e.preventDefault();
+                window.location.href = href;
+              }
+            });
+          });
+          
+          // We can disconnect once footer is processed
+          footerObserver.disconnect();
+        }
+      });
+      
+      footerObserver.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+</body>
+
+</html>

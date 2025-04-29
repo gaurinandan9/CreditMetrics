@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial: Understanding the ML Model - CreditMetrics</title>
+  <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='components/navbar8.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='components/footer41.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  <style>
+    /* CSS Variables */
+    :root {
+      --dl-color-theme-neutral-light: #ffffff;
+      --dl-color-theme-neutral-dark: #333333;
+      --dl-space-space-threeunits: 48px;
+      --dl-size-size-maxwidth: 1200px;
+      --dl-color-gray-700: #e6e6e6;
+      --dl-color-primary-500: #3498db;
+    }
+    
+    /* Ensure footer stays at bottom with minimal content */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-content {
+      flex: 1 0 auto;
+      padding: 40px 0;
+    }
+
+    footer {
+      flex-shrink: 0;
+    }
+
+    /* Footer and Navbar specific classes */
+    .thq-section-padding {
+      padding-top: var(--dl-space-space-threeunits);
+      padding-bottom: var(--dl-space-space-threeunits);
+    }
+
+    .thq-section-max-width {
+      max-width: var(--dl-size-size-maxwidth);
+    }
+
+    .thq-body-small {
+      font-size: 0.875rem;
+      font-style: normal;
+      font-family: Inter;
+      font-weight: 400;
+      line-height: 1.125rem;
+      text-transform: none;
+      text-decoration: none;
+    }
+
+    .thq-divider-horizontal {
+      width: 100%;
+      height: 1px;
+      background-color: var(--dl-color-gray-700);
+    }
+
+    .thq-button-filled {
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding-top: 12px;
+      padding-left: 24px;
+      border-radius: 8px;
+      padding-right: 24px;
+      padding-bottom: 12px;
+      background-color: var(--dl-color-primary-500);
+    }
+    
+    .thq-button-animated:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Tutorial specific styles */
+    .tutorial-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tutorial-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .section-subheading {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      color: #3498db;
+    }
+
+    .tutorial-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #34495e;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-secondary {
+      background-color: #7f8c8d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #6c7a7a;
+    }
+
+    .tutorial-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .tutorial-step {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .tutorial-step-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .tutorial-step-title {
+      display: inline-block;
+      font-size: 1.4rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .tutorial-note {
+      background-color: #f8f9fa;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin: 20px 0;
+      font-style: italic;
+    }
+
+    .feature-importance {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0;
+    }
+
+    .feature-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .feature-name {
+      width: 180px;
+      font-weight: 500;
+    }
+
+    .feature-value {
+      height: 24px;
+      background-color: #3498db;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .feature-percentage {
+      position: absolute;
+      right: -40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .model-comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .model-comparison th, .model-comparison td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .model-comparison th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+
+    .model-comparison tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .highlight {
+      background-color: #e3f2fd;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Include Navbar for logged-in users -->
+  {% include 'components/navbar_loggedin.html' %}
+
+  <div class="main-content">
+    <div class="tutorial-container">
+      <h1 class="section-heading">Tutorial 2: Understanding the ML Model</h1>
+      
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">1</span>
+        <h2 class="tutorial-step-title">The Technology Behind CreditMetrics</h2>
+        <p class="tutorial-text">
+          CreditMetrics employs a sophisticated ensemble of machine learning models to predict loan default risk. Our system combines multiple predictive algorithms to achieve higher accuracy than any single model could provide.
+        </p>
+        <p class="tutorial-text">
+          The core technologies powering our system include:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Gradient Boosting Machines:</strong> Advanced decision tree-based algorithms that excel at processing tabular data with mixed feature types</li>
+          <li><strong>Neural Networks:</strong> Deep learning models that can capture complex non-linear relationships in financial data</li>
+          <li><strong>Logistic Regression:</strong> Statistical models that provide baseline predictions and enhanced interpretability</li>
+        </ul>
+        <p class="tutorial-text">
+          These models work together in an ensemble architecture, where each contributes to the final prediction based on its individual strengths. The system automatically weights the models' outputs to optimize for both accuracy and robustness.
+        </p>
+        <img src="{{ url_for('static', filename='images/model_architecture.jpg') }}" alt="ML Model Architecture" class="tutorial-image" onerror="this.src='https://via.placeholder.com/800x400?text=ML+Model+Architecture'">
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">2</span>
+        <h2 class="tutorial-step-title">Feature Importance and Risk Factors</h2>
+        <p class="tutorial-text">
+          Not all customer attributes have the same impact on default risk. Our model assigns different weights to various features based on their predictive power. Understanding these factors can help you interpret risk assessments and focus on the most critical aspects of loan applications.
+        </p>
+        <p class="tutorial-text">
+          Below are the top features in order of their importance to the model:
+        </p>
+        <div class="feature-importance">
+          <div class="feature-bar">
+            <span class="feature-name">Credit Score</span>
+            <div class="feature-value" style="width: 85%;">
+              <span class="feature-percentage">85%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Debt-to-Income Ratio</span>
+            <div class="feature-value" style="width: 78%;">
+              <span class="feature-percentage">78%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Loan Amount</span>
+            <div class="feature-value" style="width: 62%;">
+              <span class="feature-percentage">62%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Employment Length</span>
+            <div class="feature-value" style="width: 58%;">
+              <span class="feature-percentage">58%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Annual Income</span>
+            <div class="feature-value" style="width: 55%;">
+              <span class="feature-percentage">55%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Home Ownership</span>
+            <div class="feature-value" style="width: 42%;">
+              <span class="feature-percentage">42%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Loan Purpose</span>
+            <div class="feature-value" style="width: 38%;">
+              <span class="feature-percentage">38%</span>
+            </div>
+          </div>
+          <div class="feature-bar">
+            <span class="feature-name">Loan Term</span>
+            <div class="feature-value" style="width: 35%;">
+              <span class="feature-percentage">35%</span>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-note">
+          <strong>Note:</strong> Feature importance can vary slightly between different market segments and loan types. The system adapts its weightings based on the specific context of each analysis.
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">3</span>
+        <h2 class="tutorial-step-title">How the Model Makes Predictions</h2>
+        <p class="tutorial-text">
+          CreditMetrics follows a systematic process to convert customer data into actionable risk predictions:
+        </p>
+        <ol class="tutorial-text">
+          <li><strong>Data preprocessing:</strong> Raw inputs are cleaned, normalized, and transformed into model-ready features</li>
+          <li><strong>Feature extraction:</strong> The system derives additional insights from combinations of raw data</li>
+          <li><strong>Model prediction:</strong> Each model in the ensemble makes its own prediction</li>
+          <li><strong>Ensemble integration:</strong> Individual predictions are combined using a weighted average</li>
+          <li><strong>Calibration:</strong> Raw prediction scores are calibrated to represent true probabilities</li>
+          <li><strong>Confidence estimation:</strong> The system calculates confidence intervals for each prediction</li>
+          <li><strong>Risk categorization:</strong> Final probabilities are mapped to risk categories (Low, Medium, High)</li>
+        </ol>
+        <p class="tutorial-text">
+          The entire process typically completes in under 2 seconds, providing near-instantaneous risk assessment for individual applications.
+        </p>
+        <img src="{{ url_for('static', filename='images/prediction_flow.jpg') }}" alt="Prediction Process Flow" class="tutorial-image" onerror="this.src='https://via.placeholder.com/800x400?text=Prediction+Process+Flow'">
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">4</span>
+        <h2 class="tutorial-step-title">Model Performance and Accuracy</h2>
+        <p class="tutorial-text">
+          CreditMetrics has been extensively validated on historical loan data. Our model achieves industry-leading performance metrics:
+        </p>
+        <table class="model-comparison">
+          <thead>
+            <tr>
+              <th>Performance Metric</th>
+              <th>CreditMetrics</th>
+              <th>Industry Average</th>
+              <th>Improvement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AUC-ROC</td>
+              <td>0.92</td>
+              <td>0.85</td>
+              <td>+8.2%</td>
+            </tr>
+            <tr>
+              <td>Precision</td>
+              <td>0.89</td>
+              <td>0.82</td>
+              <td>+8.5%</td>
+            </tr>
+            <tr>
+              <td>Recall</td>
+              <td>0.87</td>
+              <td>0.80</td>
+              <td>+8.8%</td>
+            </tr>
+            <tr>
+              <td>F1 Score</td>
+              <td>0.88</td>
+              <td>0.81</td>
+              <td>+8.6%</td>
+            </tr>
+            <tr>
+              <td>Accuracy</td>
+              <td>91%</td>
+              <td>84%</td>
+              <td>+8.3%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="tutorial-text">
+          What these numbers mean in practical terms:
+        </p>
+        <ul class="tutorial-text">
+          <li>For every 100 loans predicted as "high risk," approximately 89 would actually default without intervention</li>
+          <li>Out of every 100 actual defaults, our system correctly identifies about 87</li>
+          <li>The overall accuracy rate of 91% means that 9 out of 10 predictions match the actual outcome</li>
+        </ul>
+        <div class="tutorial-note">
+          <strong>Note:</strong> These metrics represent average performance across all loan types. Performance may vary slightly depending on loan category, term length, and market conditions.
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">5</span>
+        <h2 class="tutorial-step-title">Model Updates and Continuous Learning</h2>
+        <p class="tutorial-text">
+          Financial markets and borrower behaviors evolve over time. To maintain peak performance, CreditMetrics employs continuous learning techniques:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Periodic retraining:</strong> Models are retrained quarterly with the latest loan performance data</li>
+          <li><strong>Adaptive feature engineering:</strong> Feature importance is regularly reassessed to adapt to changing patterns</li>
+          <li><strong>Drift detection:</strong> The system monitors for changes in data distribution that might impact model performance</li>
+          <li><strong>Model versioning:</strong> All predictions are tagged with the model version to ensure traceability</li>
+        </ul>
+        <p class="tutorial-text">
+          When significant improvements are developed, they are deployed as model updates. These updates are backward compatible, meaning your historical analyses remain valid for comparison.
+        </p>
+      </div>
+
+      <div class="tutorial-nav">
+        <a href="{{ url_for('tutorial', page=1) }}" class="btn btn-secondary">Previous: Data Input & Preparation</a>
+        <a href="{{ url_for('tutorial', page=3) }}" class="btn btn-primary">Next: Interpreting Results</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Footer for logged-in users -->
+  {% include 'components/footer_loggedin.html' %}
+</body>
+</html> 

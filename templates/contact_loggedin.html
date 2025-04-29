@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Contact CreditMetrics</title>
+  <meta property="og:title" content="Contact CreditMetrics" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <style data-tag="reset-style-sheet">
+    html {
+      line-height: 1.15;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-width: 0;
+      border-style: solid;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    p,
+    li,
+    ul,
+    pre,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    figure,
+    blockquote,
+    figcaption {
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      background-color: transparent;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    button,
+    select {
+      text-transform: none;
+    }
+
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"] {
+      -webkit-appearance: button;
+      appearance: button;
+      color: inherit;
+    }
+
+    button::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+      border-style: none;
+      padding: 0;
+    }
+
+    button:-moz-focus,
+    [type="button"]:-moz-focus,
+    [type="reset"]:-moz-focus,
+    [type="submit"]:-moz-focus {
+      outline: 1px dotted ButtonText;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    input {
+      padding: 2px 4px;
+    }
+
+    img {
+      display: block;
+    }
+
+    details {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    [data-thq="accordion"] [data-thq="accordion-content"] {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+      padding: 0;
+    }
+
+    [data-thq="accordion"] details[data-thq="accordion-trigger"][open]+[data-thq="accordion-content"] {
+      max-height: 1000vh;
+    }
+
+    details[data-thq="accordion-trigger"][open] summary [data-thq="accordion-icon"] {
+      transform: rotate(180deg);
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+  </style>
+  <style data-tag="default-style-sheet">
+    html {
+      font-family: Inter;
+      font-size: 16px;
+    }
+
+    body {
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.15;
+      color: var(--dl-color-theme-neutral-dark);
+      background: var(--dl-color-theme-neutral-light);
+
+      fill: var(--dl-color-theme-neutral-dark);
+    }
+  </style>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='components/navbar8.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='components/contact21.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='components/contact10.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='components/footer4.css') }}" />
+</head>
+
+<body>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="{{ url_for('static', filename='components/navbar8.css') }}" rel="stylesheet" />
+
+  <div id="navbar-placeholder"></div>
+
+  <script>
+    fetch("{{ url_for('serve_component', component_name='navbar8.html') }}")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+      })
+      .catch(error => console.error("Error loading navbar:", error));            
+  </script>
+
+
+
+  <contact21-wrapper class="contact21-wrapper">
+    <!--Contact21 component-->
+    <div class="contact21-contact20 thq-section-padding">
+      <div class="contact21-max-width thq-section-max-width">
+        <div class="contact21-section-title">
+          <span class="thq-body-small">
+            <fragment class="contact-fragment28">
+              <span class="contact-text30">
+                Get in touch with us today!
+              </span>
+            </fragment>
+          </span>
+          <div class="contact21-content1">
+            <h2 class="thq-heading-2">
+              <fragment class="contact-fragment32">
+                <span class="contact-text34">Contact Us</span>
+              </fragment>
+            </h2>
+            <p class="contact21-text12 thq-body-large">
+              <fragment class="contact-fragment27">
+                <span class="contact-text29">
+                  Have questions about our credit risk assessment
+                  services? We're here to help.
+                </span>
+              </fragment>
+            </p>
+          </div>
+        </div>
+        <img alt="image"
+          src="https://media.istockphoto.com/id/1450058572/photo/businessman-using-a-laptop-and-touching-on-virtual-screen-contact-icons-consists-of-telephone.webp?a=1&b=1&s=612x612&w=0&k=20&c=sEJ3AzK1SU7ZEnOZ1hWT3Hc4BaHttgkXpLmjcx3ww1E="
+          class="thq-img-ratio-16-9" />
+        <div class="contact21-row">
+          <div class="contact21-content2">
+            <svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+              <path
+                d="M854 342v-86l-342 214-342-214v86l342 212zM854 170q34 0 59 26t25 60v512q0 34-25 60t-59 26h-684q-34 0-59-26t-25-60v-512q0-34 25-60t59-26h684z">
+              </path>
+            </svg>
+            <div class="contact21-contact-info1">
+              <div class="contact21-content3">
+                <h3 class="contact21-text13 thq-heading-3">Email</h3>
+                <p class="contact21-text14 thq-body-large">
+                  <fragment class="contact-fragment29">
+                    <span class="contact-text31">
+                      Mail us, we will get back to you as soon as
+                      possible.
+                    </span>
+                  </fragment>
+                </p>
+              </div>
+              <span class="contact21-email thq-body-small">
+                <fragment class="contact-fragment24">
+                  <span class="contact-text26">
+                    contact@creditmetrics.com
+                  </span>
+                </fragment>
+              </span>
+            </div>
+          </div>
+          <div class="contact21-content4">
+            <svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+              <path
+                d="M282 460q96 186 282 282l94-94q20-20 44-10 72 24 152 24 18 0 30 12t12 30v150q0 18-12 30t-30 12q-300 0-513-213t-213-513q0-18 12-30t30-12h150q18 0 30 12t12 30q0 80 24 152 8 26-10 44z">
+              </path>
+            </svg>
+            <div class="contact21-contact-info2">
+              <div class="contact21-content5">
+                <h3 class="contact21-text15 thq-heading-3">Phone</h3>
+                <p class="contact21-text16 thq-body-large">
+                  <fragment class="contact-fragment30">
+                    <span class="contact-text32">
+                      Call us, and we will assist you with your queries.
+                    </span>
+                  </fragment>
+                </p>
+              </div>
+              <span class="contact21-phone thq-body-small">
+                <fragment class="contact-fragment25">
+                  <span class="contact-text27">+123-456-7890</span>
+                </fragment>
+              </span>
+            </div>
+          </div>
+          <div class="contact21-content6">
+            <svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+              <path
+                d="M512 0c-176.732 0-320 143.268-320 320 0 320 320 704 320 704s320-384 320-704c0-176.732-143.27-320-320-320zM512 512c-106.040 0-192-85.96-192-192s85.96-192 192-192 192 85.96 192 192-85.96 192-192 192z">
+              </path>
+            </svg>
+            <div class="contact21-contact-info3">
+              <div class="contact21-content7">
+                <h3 class="contact21-text17 thq-heading-3">Office</h3>
+                <p class="contact21-text18 thq-body-large">
+                  <fragment class="contact-fragment31">
+                    <span class="contact-text33">
+                      Visit us, and let's discuss how we can help you.
+                    </span>
+                  </fragment>
+                </p>
+              </div>
+              <span class="contact21-address thq-body-small">
+                <fragment class="contact-fragment26">
+                  <span class="contact-text28">
+                    18th floor, Tower-2, plot-841, Mumbai
+                  </span>
+                </fragment>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </contact21-wrapper>
+
+  <contact10-wrapper class="contact10-wrapper">
+    <!--Contact10 component-->
+    <div class="contact10-container1 thq-section-padding">
+      <div class="contact10-max-width thq-section-max-width">
+        <div class="contact10-content1 thq-flex-row">
+          <div class="contact10-content2">
+            <h2 class="thq-heading-2">
+              <fragment class="home-fragment206">
+                <span class="home-text211">Contact Us</span>
+              </fragment>
+            </h2>
+            <p class="thq-body-large">
+              <fragment class="home-fragment205">
+                <span class="home-text207">
+                  <span>
+                    Reach out to us for any inquiries or assistance.
+                  </span>
+                  <br />
+                  <br />
+                </span>
+              </fragment>
+            </p>
+          </div>
+        </div>
+        <div class="contact10-content3 thq-flex-row">
+          <div class="contact10-container2">
+            <img
+              src="https://images.unsplash.com/photo-1653289755854-a41949e96282?q=80&amp;w=1400&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              class="contact10-image1 thq-img-ratio-16-9" />
+            <h3 class="contact10-text12 thq-heading-3">
+              <fragment class="home-fragment207">
+                <span class="home-text212">
+                  18th floor, Tower-2, Plot-841, Mumbai
+                </span>
+              </fragment>
+            </h3>
+            <p class="thq-body-large">
+              <fragment class="home-fragment209">
+                <span class="home-text214">
+                  Feel free to visit us at our office during business
+                  hours.
+                </span>
+              </fragment>
+            </p>
+          </div>
+          <div class="contact10-container3">
+            <img
+              src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&amp;w=1400&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              class="contact10-image2 thq-img-ratio-16-9" />
+            <h3 class="contact10-text14 thq-heading-3">
+              <fragment class="home-fragment208">
+                <span class="home-text213">
+                  Email: contact@creditmetrics.com
+                </span>
+              </fragment>
+            </h3>
+            <p class="thq-body-large">
+              <fragment class="home-fragment210">
+                <span class="home-text215">
+                  Drop us an email for any inquiries or assistance.
+                </span>
+              </fragment>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </contact10-wrapper>
+
+
+
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    fetch("{{ url_for('serve_component', component_name='footer41.html') }}")
+      .then(response => {
+        return response.text()
+      })
+      .then(data => {
+        document.getElementById("footer-placeholder").innerHTML = data;
+      })
+      .catch(error => console.error("Error loading footer:", error));            
+  </script>
+
+  <script defer="" src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+</body>
+
+</html>

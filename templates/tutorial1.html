@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial: Data Input & Preparation - CreditMetrics</title>
+  
+  <!-- Global CSS -->
+  <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+  
+  <!-- Component-specific CSS -->
+  <link href="{{ url_for('static', filename='components/navbar8.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='components/footer41.css') }}" rel="stylesheet" />
+  
+  <!-- External resources -->
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" />
+  <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  
+  <style>
+    /* CSS Variables */
+    :root {
+      --dl-color-theme-neutral-light: #ffffff;
+      --dl-color-theme-neutral-dark: #333333;
+      --dl-space-space-threeunits: 48px;
+      --dl-size-size-maxwidth: 1200px;
+      --dl-color-gray-700: #e6e6e6;
+      --dl-color-primary-500: #3498db;
+    }
+    
+    /* Ensure footer stays at bottom with minimal content */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .main-content {
+      flex: 1 0 auto;
+      padding: 40px 0;
+    }
+
+    footer {
+      flex-shrink: 0;
+    }
+
+    .tutorial-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tutorial-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .section-subheading {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      color: #3498db;
+    }
+
+    .tutorial-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #34495e;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-secondary {
+      background-color: #7f8c8d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #6c7a7a;
+    }
+
+    .tutorial-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .tutorial-step {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .tutorial-step-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background-color: #3498db;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 36px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .tutorial-step-title {
+      display: inline-block;
+      font-size: 1.4rem;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .tutorial-note {
+      background-color: #f8f9fa;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      margin: 20px 0;
+      font-style: italic;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .data-table th, .data-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .data-table th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+    }
+
+    .data-table tr:hover {
+      background-color: #f8f9fa;
+    }
+    
+    /* Additional styles to ensure component compatibility */
+    .thq-section-padding {
+      padding-top: var(--dl-space-space-threeunits);
+      padding-bottom: var(--dl-space-space-threeunits);
+    }
+
+    .thq-section-max-width {
+      max-width: var(--dl-size-size-maxwidth);
+    }
+
+    .thq-body-small {
+      font-size: 0.875rem;
+      font-style: normal;
+      font-family: Inter;
+      font-weight: 400;
+      line-height: 1.125rem;
+      text-transform: none;
+      text-decoration: none;
+    }
+
+    .thq-divider-horizontal {
+      width: 100%;
+      height: 1px;
+      background-color: var(--dl-color-gray-700);
+    }
+
+    .thq-button-filled {
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding-top: 12px;
+      padding-left: 24px;
+      border-radius: 8px;
+      padding-right: 24px;
+      padding-bottom: 12px;
+      background-color: var(--dl-color-primary-500);
+    }
+    
+    .thq-button-animated:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Include Navbar for logged-in users -->
+  {% include 'components/navbar_loggedin.html' %}
+
+  <div class="main-content">
+    <div class="tutorial-container">
+      <h1 class="section-heading">Tutorial 1: Data Input & Preparation</h1>
+      
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">1</span>
+        <h2 class="tutorial-step-title">Understanding Required Data Fields</h2>
+        <p class="tutorial-text">
+          Before you begin using CreditMetrics for risk analysis, it's important to understand what data is required for an accurate assessment. Our machine learning model analyzes various customer attributes to predict loan default risk.
+        </p>
+        <p class="tutorial-text">
+          Here are the essential data fields you'll need to provide:
+        </p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+              <th>Format</th>
+              <th>Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Credit Score</td>
+              <td>Customer's credit rating from standard credit bureaus</td>
+              <td>Numeric (300-850)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Annual Income</td>
+              <td>Customer's yearly income before taxes</td>
+              <td>Numeric ($)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Loan Amount</td>
+              <td>Total loan amount requested</td>
+              <td>Numeric ($)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Loan Term</td>
+              <td>Duration of the loan</td>
+              <td>Months (numeric)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Debt-to-Income Ratio</td>
+              <td>Existing debt payments divided by income</td>
+              <td>Percentage (%)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Employment Length</td>
+              <td>Duration at current employer</td>
+              <td>Years (numeric)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Home Ownership</td>
+              <td>Customer's housing situation</td>
+              <td>Categorical (Own, Mortgage, Rent)</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Loan Purpose</td>
+              <td>Reason for the loan</td>
+              <td>Categorical</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="tutorial-note">
+          <strong>Note:</strong> The more complete and accurate your data, the more precise our risk assessment will be. Missing data points may reduce prediction accuracy.
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">2</span>
+        <h2 class="tutorial-step-title">Data Formatting Guidelines</h2>
+        <p class="tutorial-text">
+          To ensure optimal model performance, your data should be properly formatted before submission. Here are some formatting guidelines:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Numeric values:</strong> Enter exact figures without commas or currency symbols (e.g., 50000 not $50,000)</li>
+          <li><strong>Percentages:</strong> Enter as whole numbers (e.g., 25 not 0.25 or 25%)</li>
+          <li><strong>Categorical data:</strong> Select from provided dropdown options when available</li>
+          <li><strong>Dates:</strong> Use MM/DD/YYYY format</li>
+          <li><strong>Missing data:</strong> Try to avoid missing values; use NA or leave blank if truly unknown</li>
+        </ul>
+        <p class="tutorial-text">
+          Our system performs automatic validation of your data upon submission, but proper formatting will avoid processing delays.
+        </p>
+        <img src="{{ url_for('static', filename='images/data_format_example.jpg') }}" alt="Data Format Example" class="tutorial-image" onerror="this.src='https://via.placeholder.com/800x400?text=Data+Format+Example'">
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">3</span>
+        <h2 class="tutorial-step-title">Uploading Data to CreditMetrics</h2>
+        <p class="tutorial-text">
+          You have multiple options for providing data to our system:
+        </p>
+        <h3 class="section-subheading">Option 1: Individual Entry</h3>
+        <p class="tutorial-text">
+          For analyzing single customer cases, you can enter data directly through our web interface:
+        </p>
+        <ol class="tutorial-text">
+          <li>Navigate to the "Make Predictions" section from your dashboard</li>
+          <li>Select "Individual Entry" from the analysis options</li>
+          <li>Fill out all required fields in the form</li>
+          <li>Click "Analyze Risk" to process the data</li>
+        </ol>
+        
+        <h3 class="section-subheading">Option 2: Batch Upload</h3>
+        <p class="tutorial-text">
+          For analyzing multiple customers simultaneously:
+        </p>
+        <ol class="tutorial-text">
+          <li>Navigate to the "Make Predictions" section from your dashboard</li>
+          <li>Select "Batch Upload" from the analysis options</li>
+          <li>Download our CSV template file</li>
+          <li>Fill in your data following the template format</li>
+          <li>Upload the completed CSV file</li>
+          <li>Click "Process Batch" to analyze all records</li>
+        </ol>
+        
+        <h3 class="section-subheading">Option 3: API Integration</h3>
+        <p class="tutorial-text">
+          For automated systems and continuous analysis:
+        </p>
+        <ol class="tutorial-text">
+          <li>Request API access from your account settings</li>
+          <li>Integrate our API endpoints with your systems</li>
+          <li>Send data via secure JSON requests</li>
+          <li>Receive risk assessment results programmatically</li>
+        </ol>
+        <div class="tutorial-note">
+          <strong>Note:</strong> API integration requires technical knowledge. Contact our support team for integration assistance.
+        </div>
+      </div>
+
+      <div class="tutorial-step">
+        <span class="tutorial-step-number">4</span>
+        <h2 class="tutorial-step-title">Data Preprocessing and Validation</h2>
+        <p class="tutorial-text">
+          Before analysis, our system automatically processes your data to ensure quality:
+        </p>
+        <ul class="tutorial-text">
+          <li><strong>Anomaly detection:</strong> Identifies outliers or suspicious values</li>
+          <li><strong>Missing value handling:</strong> Applies appropriate imputation methods when needed</li>
+          <li><strong>Data normalization:</strong> Scales data to be compatible with our ML models</li>
+          <li><strong>Field validation:</strong> Ensures all entries meet our data requirements</li>
+        </ul>
+        <p class="tutorial-text">
+          If any validation issues are found, you'll receive notifications with specific error messages to help you correct the data.
+        </p>
+      </div>
+
+      <div class="tutorial-nav">
+        <a href="{{ url_for('analyzeproduct') }}" class="btn btn-secondary">Back to Overview</a>
+        <a href="{{ url_for('tutorial', page=2) }}" class="btn btn-primary">Next Tutorial: Understanding the ML Model</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Footer for logged-in users -->
+  {% include 'components/footer_loggedin.html' %}
+  
+  <!-- Scripts -->
+  <script defer src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+</body>
+</html> 

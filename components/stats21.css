@@ -1,0 +1,164 @@
+.stats21-container1 {
+  width: 100%;
+  flex-direction: column;
+}
+ 
+.stats21-max-width {
+  gap: var(--dl-space-space-fourunits);
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+ 
+.stats21-container2 {
+  max-width: 50%;
+}
+ 
+.stats21-container3 {
+  align-self: center;
+  align-items: flex-start;
+  margin-left: auto;
+}
+ 
+.stats21-container4 {
+  width: 100%;
+}
+ 
+.stats21-container5 {
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+}
+ 
+.stats21-container6 {
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+}
+ 
+.stats21-container7 {
+  width: 100%;
+}
+ 
+.stats21-container8 {
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+}
+ 
+.stats21-container9 {
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+}
+ 
+.stats21-fragment10 {
+  display: contents;
+}
+ 
+.stats21-text21 {
+  display: inline-block;
+}
+ 
+.stats21-fragment11 {
+  display: contents;
+}
+ 
+.stats21-text22 {
+  display: inline-block;
+}
+ 
+.stats21-fragment12 {
+  display: contents;
+}
+ 
+.stats21-text23 {
+  display: inline-block;
+}
+ 
+.stats21-fragment13 {
+  display: contents;
+}
+ 
+.stats21-text24 {
+  display: inline-block;
+}
+ 
+.stats21-fragment14 {
+  display: contents;
+}
+ 
+.stats21-text25 {
+  display: inline-block;
+}
+ 
+.stats21-fragment15 {
+  display: contents;
+}
+ 
+.stats21-text26 {
+  display: inline-block;
+}
+ 
+.stats21-fragment16 {
+  display: contents;
+}
+ 
+.stats21-text27 {
+  display: inline-block;
+}
+ 
+.stats21-fragment17 {
+  display: contents;
+}
+ 
+.stats21-text28 {
+  display: inline-block;
+}
+ 
+.stats21-fragment18 {
+  display: contents;
+}
+ 
+.stats21-text29 {
+  display: inline-block;
+}
+ 
+.stats21-fragment19 {
+  display: contents;
+}
+ 
+.stats21-text30 {
+  display: inline-block;
+}
+ 
+.stats21-fragment20 {
+  display: contents;
+}
+ 
+.stats21-text31 {
+  display: inline-block;
+}
+ 
+@media(max-width: 991px) {
+  .stats21-max-width {
+    gap: var(--dl-space-space-twounits);
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .stats21-container2 {
+    width: 100%;
+    max-width: 100%;
+  }
+  .stats21-container3 {
+    align-self: flex-start;
+    margin-left: 0px;
+  }
+}
+ 
+@media(max-width: 479px) {
+  .stats21-image {
+    width: 100%;
+  }
+}

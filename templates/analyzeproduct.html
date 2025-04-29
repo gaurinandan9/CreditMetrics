@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyze Product - CreditMetrics</title>
+  <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+  <style>
+    /* Ensure footer stays at bottom with minimal content */
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-content {
+      flex: 1 0 auto;
+      padding: 40px 0;
+    }
+
+    footer {
+      flex-shrink: 0;
+    }
+
+    .analyze-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .section-subheading {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      color: #3498db;
+    }
+
+    .analyze-intro {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+
+    .tutorial-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .tutorial-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .tutorial-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .card-description {
+      color: #7f8c8d;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .analyze-overview {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+
+    .overview-image {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .overview-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .overview-content {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .analyze-overview {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include Navbar for logged-in users -->
+  {% include 'components/navbar_loggedin.html' %}
+
+  <div class="main-content">
+    <div class="analyze-container">
+      <h1 class="section-heading">Learn the CreditMetrics Product</h1>
+      <p class="analyze-intro">
+        Welcome to the CreditMetrics Product Tutorial. Our state-of-the-art risk analysis platform utilizes advanced machine learning algorithms to predict loan default risks with high accuracy. This tutorial will guide you through the essential components of our system and show you how to effectively use it for your bank's risk assessment needs.
+      </p>
+
+      <div class="analyze-overview">
+        <div class="overview-content">
+          <h2 class="section-subheading">What is CreditMetrics?</h2>
+          <p class="analyze-intro">
+            CreditMetrics is a comprehensive risk analysis platform designed specifically for financial institutions. It processes various attributes of loan applicants and predicts the probability of loan default using sophisticated machine learning models. Our system has been trained on extensive historical data and continuously improves its predictions through ongoing learning.
+          </p>
+          <p class="analyze-intro">
+            By leveraging artificial intelligence and data analytics, CreditMetrics helps your bank make informed decisions, reduce risk exposure, and optimize loan portfolio management.
+          </p>
+        </div>
+        <div class="overview-image">
+          <img src="{{ url_for('static', filename='images/risk_analysis.jpg') }}" alt="Risk Analysis Visualization" onerror="this.src='https://via.placeholder.com/600x400?text=Risk+Analysis+Visualization'">
+        </div>
+      </div>
+
+      <h2 class="section-subheading">Explore Our Tutorials</h2>
+      <div class="tutorial-cards">
+        <div class="tutorial-card">
+          <img src="{{ url_for('static', filename='images/data_input.jpg') }}" alt="Data Input Process" class="card-image" onerror="this.src='https://via.placeholder.com/600x400?text=Data+Input+Process'">
+          <div class="card-content">
+            <h3 class="card-title">1. Data Input & Preparation</h3>
+            <p class="card-description">
+              Learn how to properly format and input customer data for accurate risk analysis. This tutorial covers all required fields and data formatting guidelines.
+            </p>
+            <a href="{{ url_for('tutorial', page=1) }}" class="btn btn-primary">Start Tutorial</a>
+          </div>
+        </div>
+
+        <div class="tutorial-card">
+          <img src="{{ url_for('static', filename='images/ml_model.jpg') }}" alt="ML Model Operation" class="card-image" onerror="this.src='https://via.placeholder.com/600x400?text=ML+Model+Operation'">
+          <div class="card-content">
+            <h3 class="card-title">2. Understanding the ML Model</h3>
+            <p class="card-description">
+              Discover how our machine learning algorithms work to predict loan default risks and what factors influence the risk assessment results.
+            </p>
+            <a href="{{ url_for('tutorial', page=2) }}" class="btn btn-primary">Start Tutorial</a>
+          </div>
+        </div>
+
+        <div class="tutorial-card">
+          <img src="{{ url_for('static', filename='images/results_interpretation.jpg') }}" alt="Results Interpretation" class="card-image" onerror="this.src='https://via.placeholder.com/600x400?text=Results+Interpretation'">
+          <div class="card-content">
+            <h3 class="card-title">3. Interpreting Results</h3>
+            <p class="card-description">
+              Learn how to interpret risk analysis results, understand confidence scores, and implement risk-based decision making in your loan approval process.
+            </p>
+            <a href="{{ url_for('tutorial', page=3) }}" class="btn btn-primary">Start Tutorial</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-subheading">Key Features</h2>
+      <div class="analyze-intro">
+        <ul>
+          <li><strong>Accurate Risk Prediction:</strong> Up to 95% accuracy in predicting loan default risks.</li>
+          <li><strong>Comprehensive Analysis:</strong> Evaluates over 30 different factors to determine risk levels.</li>
+          <li><strong>Real-time Processing:</strong> Get instant risk assessment results for quick decision making.</li>
+          <li><strong>Detailed Reports:</strong> Access comprehensive reports with visual analytics for better understanding.</li>
+          <li><strong>Historical Performance:</strong> Track your risk assessment performance over time.</li>
+          <li><strong>Continuous Learning:</strong> Our models improve with each analysis, adapting to changing financial trends.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Footer for logged-in users -->
+  {% include 'components/footer_loggedin.html' %}
+</body>
+</html> 

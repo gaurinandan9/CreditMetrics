@@ -1,0 +1,79 @@
+.cta3-container1 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+ 
+.cta3-max-width {
+  gap: 80px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  max-width: var(--dl-size-size-maxwidth);
+  align-self: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+ 
+.cta3-container2 {
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+ 
+.cta3-placeholder-image {
+  height: 100%;
+  flex-grow: 1;
+  max-height: 400px;
+  animation-name: bounceIn;
+  animation-delay: 0s;
+  animation-duration: 300ms;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+ 
+.cta3-column {
+  gap: var(--dl-space-space-oneandhalfunits);
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
+  flex-direction: column;
+}
+ 
+.cta3-actions {
+  gap: var(--dl-space-space-oneandhalfunits);
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  display: flex;
+  align-items: flex-start;
+}
+ 
+.cta3-fragment1 {
+  display: contents;
+}
+ 
+.cta3-text3 {
+  display: inline-block;
+}
+ 
+.cta3-fragment2 {
+  display: contents;
+}
+ 
+.cta3-text4 {
+  display: inline-block;
+}
+ 
+@media(max-width: 991px) {
+  .cta3-container2 {
+    flex-direction: column;
+  }
+  .cta3-placeholder-image {
+    width: 100%;
+  }
+}

@@ -1,0 +1,73 @@
+.cta4-container1 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+ 
+.cta4-max-width {
+  gap: 80px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow: hidden;
+  max-width: var(--dl-size-size-maxwidth);
+  align-self: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+ 
+.cta4-container2 {
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+}
+ 
+.cta4-column {
+  gap: var(--dl-space-space-oneandhalfunits);
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
+  flex-direction: column;
+}
+ 
+.cta4-actions {
+  gap: var(--dl-space-space-oneandhalfunits);
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  display: flex;
+  align-items: flex-start;
+}
+ 
+.cta4-placeholder-image {
+  height: 100%;
+  flex-grow: 1;
+  max-height: 400px;
+}
+ 
+.cta4-fragment1 {
+  display: contents;
+}
+ 
+.cta4-text3 {
+  display: inline-block;
+}
+ 
+.cta4-fragment2 {
+  display: contents;
+}
+ 
+.cta4-text4 {
+  display: inline-block;
+}
+ 
+@media(max-width: 991px) {
+  .cta4-container2 {
+    flex-direction: column;
+  }
+  .cta4-placeholder-image {
+    width: 100%;
+  }
+}
